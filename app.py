@@ -93,10 +93,9 @@ def delete_task():
     task_id = data["task_id"]
 
     global tasks
-    tasks = [t for t in tasks if t["id"] != task_id]
+    tasks = [task for task in tasks if task["id"] != task_id]
 
     return jsonify({"status": "success"})
-
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -109,12 +108,11 @@ def chat():
     if "what should i do" in message or "next task" in message:
         if not pending:
             return jsonify({"reply": "All tasks are completed 🎉"})
-        nearest = min(pending, key=lambda t: t["deadline"])
+        nearest = min(pending,key=lambda t: datetime.strptime(t["deadline"], "%Y-%m-%d"))
         return jsonify({"reply": f"Work on '{nearest['name']}' next. Deadline: {nearest['deadline']}"})
     if "tasks left" in message:
         return jsonify({"reply": f"{len(pending)} tasks remaining."})
     return jsonify({"reply":"I can help with task summary, progress, or deadlines."})
-
 import os
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
