@@ -1,7 +1,13 @@
-# TaskMate - Task Monitoring System
+# TaskMate
+
+## Team Details
+- **Team Lead** : Abhinesh Gangwar ( Front-End )
+- **Team Member** : Deepanshi Agarwal ( Front-End )
+- **Team Member** : Aayushe Saini ( Back-End )
+- **Team Member** : Utkarsh Tyagi ( Back-End )
 
 ## Overview
-TaskMate is a web-based task management application built with Flask (Python) for the backend and JavaScript/HTML/CSS for the frontend. It allows users to create tasks with deadlines, add subtasks, track progress, and interact with an AI-powered chat assistant for task insights.
+**TaskMate** is a web-based task management application built with Flask (Python) for the backend and JavaScript/HTML/CSS for the frontend. It allows users to create tasks with deadlines, add subtasks, track progress, and interact with an AI-powered chat assistant for task insights.
 
 ## Features
 - **Task Creation**: Add tasks with names and deadlines
