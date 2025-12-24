@@ -33,10 +33,11 @@
         <input id="taskName" placeholder="Task name">
         <input id="taskDeadline" type="date">
         <button onclick="addTask()">Add Task</button>
-        <h2>Pending Tasks</h2>
-        <div id="pendingTasks"></div>
-        <h2>Completed Tasks</h2>
-        <div id="completedTasks"></div>
+        <h2 class="section-title pending-title">Pending Tasks</h2>
+        <div id="pendingTasks" class="task-section pending-section"></div>
+
+        <h2 class="section-title completed-title" onclick="toggleCompleted()">Completed Tasks</h2>
+        <div id="completedTasks" class="task-section completed-section"></div>
     </div>
     <div class="panel">
         <h2>Task Assistant</h2>

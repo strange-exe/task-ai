@@ -87,6 +87,17 @@ def get_tasks():
         })
     return jsonify(enriched)
 
+@app.route("/delete_task", methods=["POST"])
+def delete_task():
+    data = request.json
+    task_id = data["task_id"]
+
+    global tasks
+    tasks = [t for t in tasks if t["id"] != task_id]
+
+    return jsonify({"status": "success"})
+
+
 @app.route("/chat", methods=["POST"])
 def chat():
     message = request.json["message"].lower()
@@ -103,6 +114,7 @@ def chat():
     if "tasks left" in message:
         return jsonify({"reply": f"{len(pending)} tasks remaining."})
     return jsonify({"reply":"I can help with task summary, progress, or deadlines."})
+
 import os
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

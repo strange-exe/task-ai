@@ -1,4 +1,3 @@
-/* ---------- INITIAL HELP ---------- */
 function showChatHelp() {
     const box = document.getElementById("chatBox");
     box.innerHTML = `
@@ -11,12 +10,13 @@ function showChatHelp() {
         </div>
     `;
 }
-
-/* ---------- FETCH TASKS ---------- */
+function toggleCompleted() {
+    const box = document.getElementById("completedTasks");
+    box.style.display = box.style.display === "none" ? "block" : "none";
+}
 async function fetchTasks() {
     const pending = document.getElementById("pendingTasks");
     const completed = document.getElementById("completedTasks");
-
     pending.innerHTML = "<p>Loading...</p>";
     completed.innerHTML = "";
     try {
@@ -30,6 +30,12 @@ async function fetchTasks() {
         document.getElementById("completedCount").innerText = completedCount;
         pending.innerHTML = "";
         completed.innerHTML = "";
+        const deleteBtn = document.createElement("button");
+        deleteBtn.innerText = "Delete Task";
+        deleteBtn.className = "danger";
+        deleteBtn.onclick = () => deleteTask(task.id);
+
+div.appendChild(deleteBtn);
         tasks.forEach(task => {
             const div = document.createElement("div");
             div.className = "task";
@@ -123,6 +129,17 @@ async function markSubtask(id, index) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ task_id: id, index })
     });
+    fetchTasks();
+}
+async function deleteTask(id) {
+    if (!confirm("Delete this task and all its subtasks?")) return;
+
+    await fetch("/delete_task", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ task_id: id })
+    });
+
     fetchTasks();
 }
 async function sendChat() {

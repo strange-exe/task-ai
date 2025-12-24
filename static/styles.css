@@ -103,6 +103,21 @@ button {
 button:hover {
     background: #1D4ED8;
 }
+button.danger {
+    background: #dc2626;
+}
+
+button.danger:hover {
+    background: #b91c1c;
+}
+
+button.warning {
+    background: #f59e0b;
+}
+
+button.warning:hover {
+    background: #d97706;
+}
 
 .task-card {
     border: 1px solid #E2E8F0;
@@ -237,4 +252,28 @@ button:hover {
     color: white;
     border-bottom-left-radius: 4px;
     background: linear-gradient(135deg, #36a7f2, #2563eb);
+}
+.section-title {
+    margin-top: 24px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.pending-title {
+    color: #1e40af;
+}
+.completed-title {
+    color: #166534;
+}
+.task-section {
+    padding: 8px;
+    border-radius: 8px;
+}
+.pending-section .task {
+    border-left: 4px solid #2563eb;
+}
+.completed-section .task {
+    border-left: 4px solid #16a34a;
+    background: #f0fdf4;
+    opacity: 0.85;
 }
