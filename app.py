@@ -103,6 +103,7 @@ def chat():
     if "tasks left" in message:
         return jsonify({"reply": f"{len(pending)} tasks remaining."})
     return jsonify({"reply":"I can help with task summary, progress, or deadlines."})
-
+import os
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
