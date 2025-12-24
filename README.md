@@ -1,7 +1,7 @@
 # TaskMate - Task Monitoring System
 
 ## Overview
-TaskMate is a web-based task management application built with Flask (Python) for the backend and vanilla JavaScript/HTML/CSS for the frontend. It allows users to create tasks with deadlines, add subtasks, track progress, and interact with an AI-powered chat assistant for task insights.
+TaskMate is a web-based task management application built with Flask (Python) for the backend and JavaScript/HTML/CSS for the frontend. It allows users to create tasks with deadlines, add subtasks, track progress, and interact with an AI-powered chat assistant for task insights.
 
 ## Features
 - **Task Creation**: Add tasks with names and deadlines
@@ -14,20 +14,21 @@ TaskMate is a web-based task management application built with Flask (Python) fo
 
 ## Technology Stack
 - **Backend**: Python Flask
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Frontend**: HTML5, CSS3, JavaScript
 - **Database**: SQLite (schema defined, integration pending)
 - **Styling**: Custom CSS with modern design patterns
 
 ## Project Structure
 ```
 TBI/
-├── app.py                 # Main Flask application
-├── database.py            # SQLite database schema setup
+├── app.py                 
+├── database.py            
 ├── static/
-│   ├── script.js          # Frontend JavaScript logic
-│   └── styles.css         # Application styling
+│   ├── script.js          
+│   └── styles.css         
+    └── icon.jpg
 └── templates/
-    └── index.html         # Main HTML template
+    └── index.html
 ```
 
 ## Installation & Setup
@@ -35,6 +36,9 @@ TBI/
 ### Prerequisites
 - Python 3.7+
 - Flask (`pip install flask`)
+
+### Live Demo Link
+- `https://task.abhinesh.me/`
 
 ### Running the Application
 1. Clone or download the project files
