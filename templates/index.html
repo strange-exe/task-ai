@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TaskMate</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+<header>
+    <h1>TaskMate</h1>
+    <p>Task Monitoring System</p>
+</header>
+
+<div class="stats">
+    <div class="stat-card">
+        <span id="totalCount">0</span>
+        <p>Total Tasks</p>
+    </div>
+    <div class="stat-card">
+        <span id="pendingCount">0</span>
+        <p>Pending</p>
+    </div>
+    <div class="stat-card">
+        <span id="completedCount">0</span>
+        <p>Completed</p>
+    </div>
+</div>
+
+<div class="main">
+    <div class="panel">
+        <h2>Add Task</h2>
+        <input id="taskName" placeholder="Task name">
+        <input id="taskDeadline" type="date">
+        <button onclick="addTask()">Add Task</button>
+        <h2>Pending Tasks</h2>
+        <div id="pendingTasks"></div>
+        <h2>Completed Tasks</h2>
+        <div id="completedTasks"></div>
+    </div>
+    <div class="panel">
+        <h2>Task Assistant</h2>
+        <div class="chat-box" id="chatBox"></div>
+        <input id="chatInput" placeholder="Ask about tasks...">
+        <button onclick="sendChat()">Send</button>
+    </div>
+</div>
+<script src="../static/script.js"></script>
+</body>
+</html>
