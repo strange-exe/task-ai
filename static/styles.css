@@ -22,7 +22,7 @@ header h1 {
 }
 
 header p {
-    margin: 6px 0 0;
+    margin-top: 6px;
     font-size: 14px;
     opacity: 0.85;
 }
@@ -38,9 +38,9 @@ header p {
     background: #FFFFFF;
     padding: 14px 24px;
     border-radius: 10px;
+    min-width: 120px;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-    min-width: 120px;
 }
 
 .stat-card span {
@@ -50,7 +50,7 @@ header p {
 }
 
 .stat-card p {
-    margin: 4px 0 0;
+    margin-top: 4px;
     font-size: 13px;
     color: #475569;
 }
@@ -72,7 +72,6 @@ header p {
 .panel h2 {
     margin-top: 0;
     font-size: 18px;
-    color: #0F172A;
 }
 
 input {
@@ -103,28 +102,41 @@ button {
 button:hover {
     background: #1D4ED8;
 }
-button.danger {
-    background: #dc2626;
+
+.task-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
 }
 
-button.danger:hover {
-    background: #b91c1c;
+.task-card-section {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    padding: 12px;
 }
 
-button.warning {
-    background: #f59e0b;
+.task-card-section h3 {
+    margin-top: 0;
+    font-size: 16px;
 }
 
-button.warning:hover {
-    background: #d97706;
+.pending-section {
+    border-left: 5px solid #2563EB;
 }
 
-.task-card {
+.completed-section {
+    border-left: 5px solid #16A34A;
+    opacity: 0.9;
+}
+
+.task {
+    background: #FFFFFF;
     border: 1px solid #E2E8F0;
     padding: 12px;
     border-radius: 8px;
     margin-bottom: 12px;
-    background: #FFFFFF;
 }
 
 .task-header {
@@ -133,7 +145,8 @@ button.warning:hover {
     align-items: center;
 }
 
-.status {
+.status,
+.badge {
     font-size: 12px;
     padding: 3px 8px;
     border-radius: 999px;
@@ -153,14 +166,6 @@ button.warning:hover {
 .completed {
     background: #DCFCE7;
     color: #166534;
-}
-
-.badge {
-    font-size: 11px;
-    padding: 3px 8px;
-    border-radius: 999px;
-    margin-left: 6px;
-    font-weight: bold;
 }
 
 .overdue {
@@ -197,7 +202,6 @@ button.warning:hover {
     text-align: center;
     padding: 2px 0;
 }
-
 .subtask {
     display: flex;
     justify-content: space-between;
@@ -217,21 +221,18 @@ button.warning:hover {
     color: #16A34A;
     font-weight: bold;
 }
-
 .chat-box {
     height: 250px;
     border: 1px solid #E2E8F0;
     padding: 10px;
     overflow-y: auto;
     border-radius: 8px;
-    background: #f8fafc6c;
-}
-
-.chat-box {
+    background: #F8FAFC;
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
+
 .msg {
     max-width: 75%;
     padding: 8px 12px;
@@ -240,40 +241,17 @@ button.warning:hover {
     line-height: 1.4;
     word-wrap: break-word;
 }
+
 .msg.user {
     align-self: flex-end;
-    background: linear-gradient(135deg, #ee2fa5, #c026d3);
+    background: linear-gradient(135deg, #EE2FA5, #C026D3);
     color: white;
     border-bottom-right-radius: 4px;
-    text-align: left;
 }
+
 .msg.bot {
     align-self: flex-start;
+    background: linear-gradient(135deg, #36A7F2, #2563EB);
     color: white;
     border-bottom-left-radius: 4px;
-    background: linear-gradient(135deg, #36a7f2, #2563eb);
-}
-.section-title {
-    margin-top: 24px;
-    margin-bottom: 8px;
-    font-size: 18px;
-    font-weight: bold;
-}
-.pending-title {
-    color: #1e40af;
-}
-.completed-title {
-    color: #166534;
-}
-.task-section {
-    padding: 8px;
-    border-radius: 8px;
-}
-.pending-section .task {
-    border-left: 4px solid #2563eb;
-}
-.completed-section .task {
-    border-left: 4px solid #16a34a;
-    background: #f0fdf4;
-    opacity: 0.85;
 }
