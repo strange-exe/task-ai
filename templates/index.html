@@ -11,7 +11,6 @@
     <h1>TaskMate</h1>
     <p>Task Monitoring System</p>
 </header>
-
 <div class="stats">
     <div class="stat-card">
         <span id="totalCount">0</span>
@@ -26,18 +25,22 @@
         <p>Completed</p>
     </div>
 </div>
-
 <div class="main">
     <div class="panel">
         <h2>Add Task</h2>
         <input id="taskName" placeholder="Task name">
         <input id="taskDeadline" type="date">
         <button onclick="addTask()">Add Task</button>
-        <h2 class="section-title pending-title">Pending Tasks</h2>
-        <div id="pendingTasks" class="task-section pending-section"></div>
-
-        <h2 class="section-title completed-title" onclick="toggleCompleted()">Completed Tasks</h2>
-        <div id="completedTasks" class="task-section completed-section"></div>
+        <div class="task-sections">
+            <div class="task-card-section pending-section">
+                <h3>Pending Tasks</h3>
+                <div id="pendingTasks"></div>
+            </div>
+            <div class="task-card-section completed-section">
+                <h3>Completed Tasks</h3>
+                <div id="completedTasks"></div>
+            </div>
+        </div>
     </div>
     <div class="panel">
         <h2>Task Assistant</h2>
