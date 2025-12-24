@@ -10,10 +10,7 @@ function showChatHelp() {
         </div>
     `;
 }
-function toggleCompleted() {
-    const box = document.getElementById("completedTasks");
-    box.style.display = box.style.display === "none" ? "block" : "none";
-}
+
 async function fetchTasks() {
     const pending = document.getElementById("pendingTasks");
     const completed = document.getElementById("completedTasks");
@@ -30,12 +27,6 @@ async function fetchTasks() {
         document.getElementById("completedCount").innerText = completedCount;
         pending.innerHTML = "";
         completed.innerHTML = "";
-        const deleteBtn = document.createElement("button");
-        deleteBtn.innerText = "Delete Task";
-        deleteBtn.className = "danger";
-        deleteBtn.onclick = () => deleteTask(task.id);
-
-div.appendChild(deleteBtn);
         tasks.forEach(task => {
             const div = document.createElement("div");
             div.className = "task";
@@ -44,37 +35,38 @@ div.appendChild(deleteBtn);
             const title = document.createElement("strong");
             title.innerText = task.name;
             const status = document.createElement("span");
-            status.className =
-                "status " + task.status.toLowerCase().replace(" ", "-");
+            status.className ="status " + task.status.toLowerCase().replace(" ", "-");
             status.innerText = task.status;
             const badge = document.createElement("span");
-            badge.className =
-                "badge " + task.deadline_state.toLowerCase().replace(" ", "-");
+            badge.className ="badge " + task.deadline_state.toLowerCase().replace(" ", "-");
             badge.innerText = task.deadline_state;
             header.append(title, status, badge);
             div.appendChild(header);
-            div.innerHTML += `<div class="deadline">Deadline: ${task.deadline}</div>`;
-            let progress = task.subtasks.length ? Math.round(
-                      (task.subtasks.filter(s => s.completed).length / task.subtasks.length) *100): task.completed? 100: 0;
+            div.innerHTML += `<div class="deadline">Deadline: ${task.deadline ?? "None"}</div>`;
+            let progress = 0;
+            if (task.subtasks.length > 0) {
+                const done = task.subtasks.filter(s => s.completed).length;
+                progress = Math.round((done / task.subtasks.length) * 100);
+            } else {
+                progress = task.completed ? 100 : 0;
+            }
             div.innerHTML += `
                 <div class="progress">
                     <div class="progress-bar" style="width:${progress}%">
                         ${progress}%
                     </div>
-                </div>
-            `;
+                </div>`;
             task.subtasks.forEach((st, idx) => {
                 const stDiv = document.createElement("div");
                 stDiv.className = "subtask";
-                stDiv.innerHTML = `• ${st.name}
+                stDiv.innerHTML = `
+                    • ${st.name}
                     ${
                         st.completed
                             ? `<span class="done">✔</span>`
-                            : `<button onclick="markSubtask(${task.id},${idx})">✔</button>`
-                    }
-                `;
-                div.appendChild(stDiv);
-            });
+                            : `<button onclick="markSubtask(${task.id}, ${idx})">✔</button>`
+                    }`;
+                div.appendChild(stDiv);});
             if (!task.completed) {
                 const input = document.createElement("input");
                 input.placeholder = "Add subtask";
@@ -82,11 +74,15 @@ div.appendChild(deleteBtn);
                 input.addEventListener("keydown", e => {
                     if (e.key === "Enter") addSubtask(task.id);
                 });
-                const btn = document.createElement("button");
-                btn.innerText = "Add Subtask";
-                btn.onclick = () => addSubtask(task.id);
-                div.append(input, btn);
-            }
+                const addBtn = document.createElement("button");
+                addBtn.innerText = "Add Subtask";
+                addBtn.onclick = () => addSubtask(task.id);
+                div.append(input, addBtn);}
+            const deleteBtn = document.createElement("button");
+            deleteBtn.innerText = "Delete Task";
+            deleteBtn.className = "danger";
+            deleteBtn.onclick = () => deleteTask(task.id);
+            div.appendChild(deleteBtn);
             task.status === "Completed"
                 ? completed.appendChild(div)
                 : pending.appendChild(div);
@@ -132,14 +128,13 @@ async function markSubtask(id, index) {
     fetchTasks();
 }
 async function deleteTask(id) {
-    if (!confirm("Delete this task and all its subtasks?")) return;
-
+    const confirmDelete = confirm("Are you sure you want to delete this task?");
+    if (!confirmDelete) return;
     await fetch("/delete_task", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ task_id: id })
     });
-
     fetchTasks();
 }
 async function sendChat() {
@@ -148,27 +143,22 @@ async function sendChat() {
     if (!msg) return;
     const box = document.getElementById("chatBox");
     box.innerHTML += `<div class="msg user">You: ${msg}</div>`;
-
     const res = await fetch("/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: msg })
     });
-
     const data = await res.json();
     box.innerHTML += `<div class="msg bot">Task AI: ${data.reply}</div>`;
     box.scrollTop = box.scrollHeight;
     input.value = "";
 }
-
 document.addEventListener("DOMContentLoaded", () => {
     showChatHelp();
     fetchTasks();
-
     document.getElementById("chatInput").addEventListener("keydown", e => {
         if (e.key === "Enter") sendChat();
     });
-
     document.getElementById("taskName").addEventListener("keydown", e => {
         if (e.key === "Enter") addTask();
     });
