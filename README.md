@@ -2,12 +2,20 @@
 
 ## Team Details
 
-### Team Blaze
+> ### **Team Blaze**
+>> - **Team Lead** : Abhinesh Gangwar ( Front-End )
+> 
+>> - **Team Member** : Deepanshi Agarwal ( Front-End )
+>
+>> - **Team Member** : Aayushe Saini ( Back-End )
+> 
+>> - **Team Member** : Utkarsh Tyagi ( Back-End )
 
-- **Team Lead** : Abhinesh Gangwar ( Front-End )
-- **Team Member** : Deepanshi Agarwal ( Front-End )
-- **Team Member** : Aayushe Saini ( Back-End )
-- **Team Member** : Utkarsh Tyagi ( Back-End )
+> **Course** : BTech
+>
+> **Semester** : 2
+>
+> **College** : Graphic Era Deemed To Be University 
 
 ## Overview
 **TaskMate** is a web-based task management application built with Flask (Python) for the backend and JavaScript/HTML/CSS for the frontend. It allows users to create tasks with deadlines, add subtasks, track progress, and interact with an AI-powered chat assistant for task insights.
@@ -33,11 +41,11 @@ TaskMate/
 ├── app.py                 
 ├── database.py            
 ├── static/
-│   ├── script.js          
+│   └── script.js          
 │   └── styles.css         
-    └── icon.jpg
-└── templates/
-    └── index.html
+│   └── icon.jpg
+├── templates/
+│   └── index.html
 ```
 
 ## Installation & Setup
@@ -47,7 +55,8 @@ TaskMate/
 - Flask (`pip install flask`)
 
 ### Live Demo Link
-- **https://task.abhinesh.me/**
+- **https://task.abhinesh.me/** [^1]
+[^1]: Might take about 50-60 seconds to load
 
 ### Running the Application
 1. Clone or download the project files
@@ -90,4 +99,4 @@ This submission demonstrates core task management functionality with a focus on:
 - Modular code structure ready for expansion
 
 ## License
-This project is developed as part of a coding challenge submission.</content>
+This project is developed as part of a coding challenge submission.
