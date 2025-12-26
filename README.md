@@ -1,6 +1,7 @@
 # TaskMate
 
 ## Team Details
+- **Team Name** : Blaze
 - **Team Lead** : Abhinesh Gangwar ( Front-End )
 - **Team Member** : Deepanshi Agarwal ( Front-End )
 - **Team Member** : Aayushe Saini ( Back-End )
@@ -26,7 +27,7 @@
 
 ## Project Structure
 ```
-TBI/
+TaskMate/
 ├── app.py                 
 ├── database.py            
 ├── static/
