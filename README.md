@@ -1,7 +1,9 @@
 # TaskMate
 
 ## Team Details
-- **Team Name** : Blaze
+
+### Team Blaze
+
 - **Team Lead** : Abhinesh Gangwar ( Front-End )
 - **Team Member** : Deepanshi Agarwal ( Front-End )
 - **Team Member** : Aayushe Saini ( Back-End )
