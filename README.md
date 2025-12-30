@@ -58,6 +58,9 @@ TaskMate/
 - **https://task.abhinesh.me/** [^1]
 [^1]: Might take about 50-60 seconds to load
 
+### Explanation Video
+- **[Click Me](https://drive.google.com/file/d/1GeU70GQnDb3EiNV4-_OTTlreg9gTf6XU/view?usp=drivesdk)**
+
 ### Running the Application
 1. Clone or download the project files
 2. Navigate to the project directory
