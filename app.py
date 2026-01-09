@@ -46,6 +46,15 @@ def add_task():
     tasks.append(task)
     return jsonify({"status": "success"})
 
+@app.route("/edit_task", methods=["POST"])
+def edit_task():
+    data = request.json
+    for task in tasks:
+        if task["id"] == data["task_id"]:
+            task["name"] = data["name"]
+            task["deadline"] = data["deadline"]
+    return jsonify({"status": "success"})
+
 @app.route("/add_subtask", methods=["POST"])
 def add_subtask():
     data = request.json
@@ -71,7 +80,7 @@ def toggle_subtask():
 def toggle_task():
     data = request.json
     for task in tasks:
-        if task["id"] == data["task_id"] and not task["subtasks"]:
+        if task["id"] == data["task_id"]:
             task["completed"] = True
     return jsonify({"status": "success"})
 
@@ -85,6 +94,10 @@ def get_tasks():
             "status": get_status(task),
             "deadline_state": get_deadline_state(deadline)
         })
+    enriched.sort(
+        key=lambda t: datetime.strptime(t["deadline"], "%Y-%m-%d")
+        if t["status"] != "Completed" else datetime.max
+    )
     return jsonify(enriched)
 
 @app.route("/delete_task", methods=["POST"])
@@ -101,18 +114,61 @@ def delete_task():
 def chat():
     message = request.json["message"].lower()
     pending = [t for t in tasks if not t["completed"]]
-    if "summary" in message:
+    if "summary" in message or "overview" in message:
         return jsonify({
             "reply": f"Total: {len(tasks)}, Pending: {len(pending)}, Completed: {len(tasks) - len(pending)}"
         })
+
+    if "progress" in message:
+        if not tasks:
+            return jsonify({"reply": "No tasks available."})
+        progress_lines = []
+        for t in tasks:
+            status = get_status(t)
+            progress_lines.append(f"- {t['name']}: {status}")
+        return jsonify({"reply": "\n".join(progress_lines)})
+
     if "what should i do" in message or "next task" in message:
         if not pending:
             return jsonify({"reply": "All tasks are completed 🎉"})
         nearest = min(pending,key=lambda t: datetime.strptime(t["deadline"], "%Y-%m-%d"))
         return jsonify({"reply": f"Work on '{nearest['name']}' next. Deadline: {nearest['deadline']}"})
-    if "tasks left" in message:
+
+    if "tasks left" in message or "how many" in message:
         return jsonify({"reply": f"{len(pending)} tasks remaining."})
-    return jsonify({"reply":"I can help with task summary, progress, or deadlines."})
+
+    if "next" in message:
+        if not pending:
+            return jsonify({"reply": "🎉 All tasks are completed!"})
+
+        nearest = min(
+            pending,
+            key=lambda t: datetime.strptime(t["deadline"], "%Y-%m-%d")
+        )
+        return jsonify({
+            "reply": f"⏭ Work on '{nearest['name']}' next. Deadline: {nearest['deadline']}"
+        })
+
+    if "detail" in message or "info" in message or "about" in message:
+        for task in tasks:
+            if task["name"].lower() in message:
+                total = len(task["subtasks"])
+                done = sum(1 for s in task["subtasks"] if s["completed"])
+                progress = 100 if task["completed"] else (int(done / total * 100) if total else 0)
+
+                return jsonify({
+                    "reply": (
+                        f"{task['name']}\n"
+                        f"Deadline: {task['deadline']}\n"
+                        f"Progress: {progress}%\n"
+                        f"Subtasks: {done}/{total}"
+                    )
+                })
+        return jsonify({"reply": "❌ Task not found."})
+
+    return jsonify({
+        "reply": "Ask me about task summary, details, deadlines, or next task."
+    })
 import os
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

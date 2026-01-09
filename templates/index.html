@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TaskMate</title>
     <link rel="stylesheet" href="../static/styles.css">
     <link rel="icon" type="image/png" href="../static/icon.jpg">
 </head>
 <body>
 <header>
-    <h1>TaskMate</h1>
-    <p>Task Monitoring System</p>
+    <div class="header-content">
+        <h1>TaskMate</h1>
+        <p>Task Monitoring System</p>
+    </div>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleDarkMode()" title="Toggle dark mode">🌙</button>
 </header>
 <div class="stats">
     <div class="stat-card">
@@ -27,8 +31,8 @@
 </div>
 <div class="main">
     <div class="panel">
-        <h2>Add Task</h2>
-        <input id="taskName" placeholder="Task name">
+        <h2>Task Management</h2>
+        <input id="taskName" placeholder="Enter task name...">
         <input id="taskDeadline" type="date">
         <button onclick="addTask()">Add Task</button>
         <div class="task-sections">
@@ -46,7 +50,7 @@
         <h2>Task Assistant</h2>
         <div class="chat-box" id="chatBox"></div>
         <input id="chatInput" placeholder="Ask about tasks...">
-        <button onclick="sendChat()">Send</button>
+        <button onclick="sendChat()">Send Message</button>
     </div>
 </div>
 <script src="../static/script.js"></script>
