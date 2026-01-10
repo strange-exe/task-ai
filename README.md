@@ -78,7 +78,7 @@ TaskMate/
 [^1]: Might take about 50-60 seconds to load
 
 ### Explanation Video
-- **[Click Me](https://drive.google.com/file/d/1GeU70GQnDb3EiNV4-_OTTlreg9gTf6XU/view?usp=drivesdk)**
+- **[Click Me](https://drive.google.com/file/d/1HMLbKwNDyFUu1btTQgoGs0jIAqRDSGDB/view?usp=drivesdk)**
 
 ### Running the Application on your System
 1. Clone or download the project files
